@@ -4,10 +4,10 @@
 
 int main()
 {
-	char filename = "banco";
+	string filename = "banco";
 
 	print(filename);
-	insert();
+//	insert();
 	
-
+	return 0;
 }
