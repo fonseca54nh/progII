@@ -16,48 +16,48 @@
 //ie
 //rs
 
-string name, address, state, mail, rs;
-int cpf, cnpj, ie;
+civil civ;
+juridic jur;
 
-//functions to collet the data from the user input
-void inputCivil(vector<civil> civ)
+vector<string> collect(vector<string> tmp)
 {
-	
-	cout << "Digite abaixo os itens requisitados.";
-
-	cout << "Nome: ";
-	cin >> name;	civ::name.push_back(name);
+	cout << "Name: ";
+	cin >> civ.name; tmp.push_back(civ.name);
 	cout << "Cpf: ";
-	cin >> cpf;	civ.cpf.push_back(cpf);
-	cout << "Endereco: ";
-	cin >> address;	civ.address.push_back(address);
-	cout << "Email: ";
-	cin >> mail;	civ.mail.push_back(mail);
-	cout << "Estado Civil: ";
-	cin >> state;	civ.state.push_back(state);
+	cin >> civ.cpf; tmp.push_back(civ.cpf);
+	cout << "Address: ";
+	cin >> civ.address; tmp.push_back(civ.address);
+	cout << "Mail: ";
+	cin >> civ.mail; tmp.push_back(civ.mail);
+	cout << "State: ";
+	cin >> civ.state; tmp.push_back(civ.state);
+	
+
+	return tmp;
+
 }
 
-void inputJuri(vector<juridic> jur)
+vector<string> collect2(vector<string> tmp)
 {
-
-	cout << "Digite abaixo os itens requisitados.";
-
-	cout << "Nome: ";
-	cin >> name;	jur.name.push_back(name);
-	cout << "Cpf: ";
-	cin >> cnpj;	jur.cnpj.push_back(cnpj);
-	cout << "Endereco: ";
-	cin >> address; jur.address.push_back(address);
-	cout << "Email: ";
-	cin >> mail;	jur.mail.push_back(mail);
+	
+	cout << "Name: ";
+	cin >> jur.name; tmp.push_back(jur.name);
+	cout << "Cnpj: ";
+	cin >> jur.cnpj; tmp.push_back(jur.cnpj);
+	cout << "Address: ";
+	cin >> jur.address; tmp.push_back(jur.address);
+	cout << "Mail: ";
+	cin >> jur.mail; tmp.push_back(jur.mail);
 	cout << "Inscricao Estadual: ";
-	cin >> ie;	jur.ie.push_back(ie);
+	cin >> jur.ie; tmp.push_back(jur.ie);
 	cout << "Razao Social: ";
-	cin >> rs;	jur.rs.push_back(rs);
+	cin >> jur.rs; tmp.push_back(jur.rs);
+
+	return tmp;
 }
 
 //funtion to insert elements
-void insert(vector<string> person, const char *filename)
+void insert(string filename)
 {
 
 	int option;
@@ -65,40 +65,38 @@ void insert(vector<string> person, const char *filename)
 	cout << "Digite o tipo de pessoa que deseja inserir: ";
 	cin >> option;
 
-	ofstream file(filename);
-	file.open(filename, ios_base::app);
-
+	ofstream file(filename, fstream::app);
+	
 	while(option != 1 && option != 2)
 	{
 		if(option == 3) break;
 		cout << "option invalida, digite novamente ";
 		cin >> option;
 	}
-	
-	//call here the function that inserts the vector containing the classes
 
 	if(option == 1)
 	{
-	
-		inputCivil(vector<string> civil);
-			
 		file << endl << ";1" << endl;
-		
-		for(int i = 0; i < civil.size(); ++i)
+		vector<string> tmp;
+			
+		vector<string> mula = collect(tmp);		
+
+		for (int i = 0; i < mula.size(); ++i)
 		{
-			file << person.at(i) << endl; 
+			file << mula.at(i) << endl;
 		}
 	}
 	
 	if(option == 2)
 	{
-		inputJuri(vector<string> juridic);
-		
 		file << endl << ";2" << endl;
+		vector<string> tmp;
+			
+		vector<string> mula = collect2(tmp);		
 
-		for(int i = 0; i < juridic.size(); ++i)
+		for (int i = 0; i < mula.size(); ++i)
 		{
-			file << person.at(i) << endl; 
+			file << mula.at(i) << endl;
 		}
 	}
 }
@@ -114,7 +112,7 @@ void print(string filename)
 	
 	while(getline(file, tmp))
 	{
-		if(tmp != ";")
+		if(tmp != ";1" && tmp != ";2")
 		{
 			cout << tmp << endl;
 		}

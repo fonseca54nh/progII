@@ -8,28 +8,20 @@ using namespace std;
 class person 
 {
 public:
-	int nasc;
-	vector<string> address, name, mail;
+	string address, name, mail, nasc;
 };
 
 class civil: public person
 {
 public:
-	int cpf;
-	vector<string> state;
+	string state, cpf;
 };
 
 class juridic: public person
 {
 public:
-	int cnpj, ie;
-	vector<string> rs;
+	string rs, cnpj, ie;
 };
 
 void print(string); 
-
-void inputCivil(vector<string>);
-
-void inputJuri(vector<string>);
-
-void insert(vector<string> person, const char *filename);
+void insert(string);

@@ -1,13 +1,12 @@
 #include "pessoa.hpp"
 
-
-
 int main()
 {
 	string filename = "banco";
 
+	insert(filename);
+
 	print(filename);
-//	insert();
 	
 	return 0;
 }
