@@ -1,0 +1,53 @@
+warning('off','all')
+pkg load symbolic
+
+syms 'x'
+
+f(x) = input('Digite a funcao: ')
+
+val = input('Valor aleatorio: ')
+
+err = input('Erro permitido: ')
+
+it = input ('Numero de iteracoes: ')
+
+d = diff(f);
+
+sup = input('Valor superior: ')
+
+inf = input('Valor inferior: ')
+
+vecRaphson = [val];
+vecSec = [inf sup];
+
+fprintf('\n================================================\n')
+fprintf('\nNewton-Raphson: \n')
+
+for i=1:it
+	new = val - (f(val)/d(val));
+	fprintf('\n Funcao - inicial < erro: %f - %f < %f \n', double(new), double(val), double(err))
+	vecRaphson = [vecRaphson new];
+	if abs(new - val) < err
+		break;
+end
+val = new;
+end
+fprintf('\nNewton-Raphson: %f \n',double (new)) 
+fprintf('Iteracoes: %f \n', double(i))
+disp(vecRaphson)
+fprintf('\n================================================\n')
+fprintf('\nSecante: \n')
+
+for j=1:it
+	sec = sup - (f(sup)*((sup - inf)/(f(sup)-f(inf))));
+	fprintf('\n Resultado - inicial < erro: %f - %f < %f \n', double(sec), double(sup), double(err))
+	vecSec = [vecSec sec];
+	if abs(sec - sup) < err
+		break;	
+end
+	inf = sup;
+	sup = sec;
+end
+fprintf('\nSecante: %f \n',double (sup)) 
+fprintf('Iteracoes: %f \n', double(j))
+disp(vecSec)
