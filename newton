@@ -25,6 +25,7 @@ fprintf('\nNewton-Raphson: \n')
 
 for i=1:it
 	new = val - (f(val)/d(val));
+	new = double(new);
 	fprintf('\n Funcao - inicial < erro: %f - %f < %f \n', double(new), double(val), double(err))
 	vecRaphson = [vecRaphson new];
 	if abs(new - val) < err
@@ -40,6 +41,7 @@ fprintf('\nSecante: \n')
 
 for j=1:it
 	sec = sup - (f(sup)*((sup - inf)/(f(sup)-f(inf))));
+	sec = double(sec);
 	fprintf('\n Resultado - inicial < erro: %f - %f < %f \n', double(sec), double(sup), double(err))
 	vecSec = [vecSec sec];
 	if abs(sec - sup) < err
